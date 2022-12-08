@@ -4,50 +4,26 @@ import Common
 
 class TestsDay8: XCTestCase {
 
-    let input = Input.getInputString(name: "Day8", bundle: .twentyTwentyTwo)
-        .components(separatedBy: "\n")
-        .map { string in
-            string.components(separatedBy: " | ")
-            .map { string in
-                return string.components(separatedBy: " ")
-            }
-        }
+    let input = Array(Input.array(seperator: "\n", file: "Day8", bundle: .twentyTwentyTwo, compactmap:  { $0 } ).dropLast())
         
-    let example = Input.getInputString(name: "Day8Example", bundle: .twentyTwentyTwo)
-        .components(separatedBy: "\n")
-        .map { string in
-            string.components(separatedBy: " | ")
-            .map { string in
-                return string.components(separatedBy: " ")
-            }
-        }
-    
-    let example2 = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
-            .components(separatedBy: " | ")
-            .map { string in
-                return string.components(separatedBy: " ")
-            }
+    let example = Array(Input.array(seperator: "\n", file: "Day8Example", bundle: .twentyTwentyTwo, compactmap:  { $0 } ).dropLast())
     
     func test_day8_part1_example() {
-        XCTAssertEqual(Day8.part1(example), 26)
+        XCTAssertEqual(Day8.part1(example), 21)
     }
     
     func test_day8_part1() {
-        XCTAssertEqual(Day8.part1(input), 303)
+        XCTAssertEqual(Day8.part1(input), 1705)
     }
 
     func test_day8_part2_example() {
-        XCTAssertEqual(Day8.part2(example), 61229)
-    }
-    
-    func test_day8_part2_example2() {
-        XCTAssertEqual(Day8.part2([example2]), 5353)
+        XCTAssertEqual(Day8.part2(example), 8)
     }
 
     func test_day8_part2() {
-        measure {
-            XCTAssertEqual(Day8.part2(input), 961734)
-        }
+//        measure {
+            XCTAssertEqual(Day8.part2(input), 371200)
+//        }
     }
 }
 

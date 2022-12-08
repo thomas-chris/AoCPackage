@@ -1,109 +1,137 @@
 import Algorithms
+import Common
 import Foundation
 import Regex
 
 
 public struct Day8 {
     
-    public static func part1(_ input: [[[String]]]) -> Int {
-        var total = 0
+    public static func part1(_ input: [String]) -> Int {
         
-        for row in input {
-                var countForRow = 0
-                for number in row.last! {
-                    switch number.count {
-                    case 2, 3, 4, 7:
-                        total += 1
-                        countForRow += 1
-                    default:
-                        break
-                    }
+        let maxX = (input.first?.count ?? 0) - 1
+        let maxY = (input.count) - 1
+        var positions = [Position: Int]()
+        for y in 0..<input.count {
+            for x in 0..<input[y].count {
+                positions[Position(x: x, y: y)] = Int(input[y][x])
             }
         }
-       return total
-    }
-    
-    public static func part2(_ input: [[[String]]]) -> Int {
-        var outputTotals = 0
-        for row in input {
-                let input = row.first!
-                let output = row.last!
-                outputTotals += solve(input: input, output: output)
-            }
-       return outputTotals
-    }
-
-    private static func solve(input: [String], output: [String]) -> Int {
         
-        
-        var unsolved = Set(input)
-        
-        let one = unsolved.first { $0.count == 2 }!
-        let four = unsolved.first { $0.count == 4 }!
-        let seven = unsolved.first { $0.count == 3 }!
-        let eight = unsolved.first { $0.count == 7 }!
-        
-        unsolved.remove(one)
-        unsolved.remove(four)
-        unsolved.remove(seven)
-        unsolved.remove(eight)
-        
-        let nine = unsolved.first { string in
-            string.count == 6 && string.isSuperSet(of: four)
-        }!
-        
-        unsolved.remove(nine)
-        
-        let three = unsolved.first { string in
-            string.count == 5 && string.isSuperSet(of: one)
-        }!
-        
-        unsolved.remove(three)
-        
-        let zero = unsolved.first { string in
-            string.count == 6 && string.isSuperSet(of: one)
-        }!
-        
-        unsolved.remove(zero)
-        
-        let six = unsolved.first { string in
-            string.count == 6
-        }!
-        
-        unsolved.remove(six)
-        
-        let five = unsolved.first { string in
-            let newNine = nine.filter { character in
-                !one.contains(character)
-            }
-            return string.count == 5 && string.isSuperSet(of: newNine)
-        }!
-        
-        unsolved.remove(five)
-        
-        let two = unsolved.first { string in
-            return string.count == 5
-        }!
-        
-        unsolved.remove(two)
-
-        let numbersSet = [Set(zero), Set(one), Set(two), Set(three), Set(four), Set(five), Set(six), Set(seven), Set(eight), Set(nine)]
-        var total = ""
-        for value in output {
-            numbersSet.enumerated().forEach { (index, numbers) in
-                if Set(value).sorted() == numbers.sorted() {
-                    total += String(index)
+        var total = (2*maxY) + (2*maxX)
+        for y in 1..<maxY {
+            for x in 1..<maxX {
+                if let value = positions[Position(x: x, y: y)] {
+                    // check left
+                    if (0..<x).map({ Position(x: $0, y: y) })
+                        .first(where: { positions[$0] ?? -1 >= value }) == nil {
+                        total += 1
+                        continue
+                    }
+                    
+                    // check right
+                    if (x+1...maxX).map({ Position(x: $0, y: y) })
+                        .first(where: { positions[$0] ?? -1 >= value }) == nil {
+                        total += 1
+                        continue
+                    }
+                    
+                    // check top
+                    if (0..<y).map({ Position(x: x, y: $0) })
+                        .first(where: { positions[$0] ?? -1 >= value }) == nil {
+                        total += 1
+                        continue
+                    }
+                    
+                    // check bottom
+                    if (y+1...maxY).map({ Position(x: x, y: $0) })
+                        .first(where: { positions[$0] ?? -1 >= value }) == nil {
+                        total += 1
+                        continue
+                    }
                 }
             }
         }
         
-        return Int(total)!
+        return total
+    }
+    
+    public static func part2(_ input: [String]) -> Int {
+        let maxX = (input.first?.count ?? 0) - 1
+        let maxY = (input.count) - 1
+        var positions = [Position: Int]()
+        for y in 0..<input.count {
+            for x in 0..<input[y].count {
+                positions[Position(x: x, y: y)] = Int(input[y][x])
+            }
+        }
+        
+        var highestScore = 0
+        for y in 1..<maxY {
+            for x in 1..<maxX {
+                if let value = positions[Position(x: x, y: y)] {
+                    
+                    var left = 0
+                    var right = 0
+                    var top = 0
+                    var bottom = 0
+                    let leftTrees = (0..<x).map({ Position(x: $0, y: y)}).compactMap({ positions[$0]})
+                    for tree in leftTrees.reversed() {
+                        if tree < value {
+                            left += 1
+                        } else if tree >= value {
+                            left += 1
+                            break
+                        } else {
+                            break
+                        }
+                    }
+                    
+                    let rightTrees = (x+1...maxX).map({ Position(x: $0, y: y)}).compactMap({ positions[$0]})
+                    for tree in rightTrees {
+                        if tree < value {
+                            right += 1
+                        } else if tree >= value {
+                            right += 1
+                            break
+                        } else {
+                            break
+                        }
+                    }
+                    
+                    let topTrees = (0..<y).map({ Position(x: x, y: $0)}).compactMap({ positions[$0]})
+                    for tree in topTrees.reversed() {
+                        if tree < value {
+                            top += 1
+                        } else if tree >= value {
+                            top += 1
+                            break
+                        } else {
+                            break
+                        }
+                    }
+                    
+                    let bottomTrees = (y+1...maxY).map({ Position(x: x, y: $0)}).compactMap({ positions[$0]})
+                    for tree in bottomTrees {
+                        if tree < value {
+                            bottom += 1
+                        } else if tree >= value {
+                            bottom += 1
+                            break
+                        } else {
+                            break
+                        }
+                    }
+                
+                    let score = left * right * bottom * top
+
+                    if score > highestScore {
+                        highestScore = score
+                    }
+                }
+            }
+        }
+        
+        return highestScore
     }
 }
 
-extension String {
-    func isSuperSet(of string: String) -> Bool {
-        let selfSet = CharacterSet(charactersIn: self)
-        return selfSet.isSuperset(of: CharacterSet(charactersIn: string))
-    }
-}

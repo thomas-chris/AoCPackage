@@ -1,3 +1,5 @@
+import Foundation
+
 public extension String {
 
     var length: Int {
@@ -22,5 +24,10 @@ public extension String {
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
         return String(self[start ..< end])
+    }
+
+    func isSuperSet(of string: String) -> Bool {
+        let selfSet = CharacterSet(charactersIn: self)
+        return selfSet.isSuperset(of: CharacterSet(charactersIn: string))
     }
 }

@@ -13,7 +13,7 @@ public struct Day5 {
         
         var (map, instructions) = parse(input)
         for instruction in instructions {
-            for i in 1...instruction[0] {
+            for _ in 1...instruction[0] {
                 var from = map[instruction[1]]
                 var to = map[instruction[2]]
                 let last = from?.removeLast() ?? " "
@@ -35,11 +35,11 @@ public struct Day5 {
         var (map, instructions) = parse(input)
         
         for instruction in instructions {
-            guard var from = map[instruction[1]],
+            guard let from = map[instruction[1]],
                   var to = map[instruction[2]]
             else { fatalError("failure to parse data") }
             
-            let move = from.dropFirst(((from.count ?? 0) - instruction[0]))
+            let move = from.dropFirst(((from.count) - instruction[0]))
             to.append(contentsOf: move)
             
             map[instruction[2]] = to
@@ -72,7 +72,7 @@ public struct Day5 {
         
         var maxIndex = 0
         mapValues.forEach { if $0.count - 1 > maxIndex { maxIndex = $0.count - 1}}
-        var map = mapValues
+        let map = mapValues
             .map { array in
                 var mutated = array
                 mutated.resize(maxIndex, fillWith: Character(" "))
@@ -96,7 +96,7 @@ public struct Day5 {
 }
 
 extension RangeReplaceableCollection {
-    public mutating func resize(_ size: IndexDistance, fillWith value: Iterator.Element) {
+    public mutating func resize(_ size: Int, fillWith value: Iterator.Element) {
         let c = count
         if c < size {
             append(contentsOf: repeatElement(value, count: c.distance(to: size)))

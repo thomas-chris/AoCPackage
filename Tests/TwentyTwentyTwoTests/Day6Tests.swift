@@ -5,26 +5,25 @@ import Common
 
 class TestsDay6: XCTestCase {
 
-    let input = Array(Input.array(seperator: ",", file: "Day6", bundle: .twentyTwentyTwo, compactmap:  { string in Int(string.replacingOccurrences(of: "\n", with: ""))! } ))
+    let input = Input.getInputString(name: "Day6", bundle: .twentyTwentyTwo)
         
-    let example = Array(Input.array(seperator: ",", file: "Day6Example", bundle: .twentyTwentyTwo, compactmap:  { string in Int(string.replacingOccurrences(of: "\n", with: ""))! } ))
+    let example = Input.getInputString(name: "Day6Example", bundle: .twentyTwentyTwo)
     
     func test_day6_part1_example() throws {
-        XCTAssertEqual(try Day6.part1(example, turns: 18), 26)
-        XCTAssertEqual(try Day6.part1(example, turns: 80), 5934)
+        XCTAssertEqual(Day6.part1(example), 7)
     }
     
     func test_day6_part1() {
-        XCTAssertEqual(try Day6.part1(input, turns: 80), 393019)
+        XCTAssertEqual(Day6.part1(input), 1655)
     }
 
     func test_day6_part2_example() throws {
-        XCTAssertEqual(try Day6.part1(example, turns: 256), 26984457539)
+        XCTAssertEqual(Day6.part2(example), 19)
     }
 
     func test_day5_part2() throws {
         measure {
-            XCTAssertEqual(try? Day6.part1(input, turns: 256), 1757714216975)
+            XCTAssertEqual(Day6.part2(input), 2665)
         }
     }
 }
