@@ -133,5 +133,34 @@ public struct Day8 {
         
         return highestScore
     }
+    
+    public static func part2Redo(_ input: [String]) -> Int {
+        let maxX = (input.first?.count ?? 0) - 1
+            let maxY = (input.count) - 1
+            var positions = [Position: Int]()
+            for y in 0..<input.count {
+                for x in 0..<input[y].count {
+                    positions[Position(x: x, y: y)] = Int(input[y][x])
+                }
+            }
+            
+            var highestScore = 0
+            for y in 1..<maxY {
+                for x in 1..<maxX {
+                    let value = positions[Position(x: x, y: y)]!
+                    let left = ((0..<x).map({ Position(x: $0, y: y)}).compactMap({ positions[$0] }).reversed().firstIndex(where: { $0 >= value }) ?? x-1) + 1
+                    let right = ((x+1...maxX).map({ Position(x: $0, y: y)}).compactMap({ positions[$0] }).firstIndex(where: { $0 >= value }) ?? (maxY)-(x+1)) + 1
+                    let top = ((0..<y).map({ Position(x: x, y: $0)}).compactMap({ positions[$0] }).reversed().firstIndex(where: { $0 >= value }) ?? y-1) + 1
+                    let bottom = ((y+1...maxY).map({ Position(x: x, y: $0)}).compactMap({ positions[$0] }).firstIndex(where: { $0 >= value }) ?? (maxX)-(y+1)) + 1
+                    let score = left * right * bottom * top
+                    
+                    if score > highestScore {
+                        highestScore = score
+                    }
+                }
+            }
+            
+            return highestScore
+    }
 }
 
