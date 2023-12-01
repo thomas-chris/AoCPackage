@@ -16,6 +16,9 @@ let package = Package(
         .library(
             name: "TwentyTwentyTwo",
             targets: ["TwentyTwentyTwo"]),
+        .library(
+            name: "TwentyTwentyThree",
+            targets: ["TwentyTwentyThree"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -51,6 +54,17 @@ let package = Package(
                 .process("Inputs")
             ]
         ),
+        .target(
+            name: "TwentyTwentyThree",
+            dependencies: [
+                "Common",
+                .product(name: "Algorithms", package: "swift-algorithms"),
+                .product(name: "Regex", package: "Regex")
+            ],
+            resources: [
+                .process("Inputs")
+            ]
+        ),
         .testTarget(
             name: "TwentyFifteenTests",
             dependencies: [
@@ -61,6 +75,12 @@ let package = Package(
             name: "TwentyTwentyTwoTests",
             dependencies: [
                 "TwentyTwentyTwo",
+                "Common"
+            ]),
+        .testTarget(
+            name: "TwentyTwentyThreeTests",
+            dependencies: [
+                "TwentyTwentyThree",
                 "Common"
             ]),
     ]
