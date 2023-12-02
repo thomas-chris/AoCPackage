@@ -16,7 +16,7 @@ public struct Day2 {
                 greenRedBlue.0 <= totalGreen && greenRedBlue.1 <= totalRed && greenRedBlue.2 <= totalBlue
             }
             
-            if validGames.allSatisfy({ $0 == true }) {
+            if validGames.allSatisfy({ $0 }) {
                 return key
             }
             
