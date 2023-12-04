@@ -96,7 +96,7 @@ public struct Day3 {
     
     private static func extractNumbers(for position: Position, from grid: [Position: String]) -> [Int] {
         
-        var matrix = position.matrix
+        let matrix = position.matrix
         var parts = [Int]()
         var grid = grid
         for postion in matrix {
