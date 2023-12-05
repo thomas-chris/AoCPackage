@@ -16,11 +16,11 @@ class TestsDay5: XCTestCase {
     }
     
     func test_day5_part2Example() {
-        XCTAssertEqual(try Day5.getAnswerPart2(input: example), 30)
+        XCTAssertEqual(try Day5.getAnswerPart2(input: example), 46)
     }
     
     func test_day5_part2() {
-        XCTAssertEqual(try Day5.getAnswerPart2(input: input), 87449461)
+        XCTAssertEqual(try Day5.getAnswerPart2(input: input), 37806486)
     }
 }
 
