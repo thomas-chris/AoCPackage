@@ -19,7 +19,7 @@ public struct Day5 {
             let values = components.dropFirst()
             var instructions = [Int: (Int, Int)]()
             for list in values {
-                guard !list.isEmpty else { return }
+                guard !list.isEmpty else { break }
                 let stringComponents = list.components(separatedBy: " ").compactMap { Int($0) }
                 let end = stringComponents[0]
                 let start = stringComponents[1]
@@ -44,10 +44,11 @@ public struct Day5 {
         var exists = false
         for i in source {
             for j in map.keys {
-                let sourceRange = j...(j+map[j]!.1)
-                if let index = sourceRange.firstIndex(of: i) {
-                    let value = sourceRange.distance(from: sourceRange.startIndex, to: index)
-                    output.append(map[j]!.0 + value)
+                let rangeLength = map[j]!.1
+                let sourceRange = j...(j+rangeLength)
+                if sourceRange.contains(i) {
+                    let index = i - j
+                    output.append(map[j]!.0 + index)
                     exists = true
                 }
             }
