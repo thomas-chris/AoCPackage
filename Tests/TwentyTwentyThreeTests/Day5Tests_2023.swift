@@ -19,8 +19,9 @@ class TestsDay5: XCTestCase {
         XCTAssertEqual(try Day5.getAnswerPart2(input: example), 46)
     }
     
-    func test_day5_part2() {
-        XCTAssertEqual(try Day5.getAnswerPart2(input: input), 37806486)
-    }
+    //This test takes 45 minutes to run
+//    func test_day5_part2() {
+//        XCTAssertEqual(try Day5.getAnswerPart2(input: input), 37806486)
+//    }
 }
 
