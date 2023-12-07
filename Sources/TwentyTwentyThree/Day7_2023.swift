@@ -58,6 +58,15 @@ public struct Day7 {
         solve(for: input, handType: handType(_:))
     }
     
+    public static func getAnswerPart2(input: [String]) throws -> Int {
+        
+        let fixedInput = input.map { row in
+            row.replacingOccurrences(of: "J", with: "*")
+        }
+        return solve(for: fixedInput, handType: handTypeWithJokers(_:))
+        
+    }
+    
     private static func solve(for rows: [String], handType: @escaping ([Card]) -> Hand) -> Int {
         rows
             .map { row in
@@ -95,45 +104,39 @@ public struct Day7 {
         let setCards = Set(cards)
         let setCount = setCards.count
         
-        if setCount == 1 {
-            return .fiveOfAKind
-        }
-        
-        if setCount == 5 {
-            return .highCard
-        }
-        
-        if setCount == 2 {
-            for card in setCards {
-                if cards.filter({ $0 == card }).count == 4 {
-                    return .fourOfAKind
-                }
+        switch setCount {
+        case 1: return .fiveOfAKind
+        case 2:
+            let card = setCards.first
+            let count = cards.filter({ $0 == card }).count
+            if count == 4 || count == 1{
+                return .fourOfAKind
             }
             return .fullHouse
-        }
-        
-        if setCount == 4 {
-            return .onePair
-        }
-        
-        if cards.filter({ $0.rawValue == cards[0].rawValue }).count == 3 ||
-            cards.filter({ $0.rawValue == cards[1].rawValue }).count == 3 ||
-            cards.filter({ $0.rawValue == cards[2].rawValue }).count == 3 {
-            return .threeOfAKind
+        case 3:
+            if cards.filter({ $0.rawValue == cards[0].rawValue }).count == 3 ||
+                cards.filter({ $0.rawValue == cards[1].rawValue }).count == 3 ||
+                cards.filter({ $0.rawValue == cards[2].rawValue }).count == 3 {
+                return .threeOfAKind
+                
+            }
             
+            return .twoPair
+        case 4: return .onePair
+        case 5: return .highCard
+        default: fatalError()
         }
-        
-        return .twoPair
     }
     
     private static func handTypeWithJokers(_ jokerCards: [Card] ) -> Hand {
         let setCards = Set(jokerCards)
         let setCount = setCards.count
         
+        if setCount == 1 {
+            return .fiveOfAKind
+        }
+        
         if setCards.contains(.joker) {
-            if setCount == 1 {
-                return .fiveOfAKind
-            }
             
             var newHand: Hand = .highCard
             
@@ -150,14 +153,6 @@ public struct Day7 {
         return handType(jokerCards)
     }
     
-    public static func getAnswerPart2(input: [String]) throws -> Int {
-        
-        let fixedInput = input.map { row in
-            row.replacingOccurrences(of: "J", with: "*")
-        }
-        return solve(for: fixedInput, handType: handTypeWithJokers(_:))
-        
-    }
 }
 
 
