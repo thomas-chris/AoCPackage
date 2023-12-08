@@ -21,6 +21,20 @@ public func gcd(_ m: Int, _ n: Int) -> Int {
   return b
 }
 
+public func lcm(_ a: Int, _ b: Int) -> Int {
+    return a * b / gcd(a, b)
+}
+
+public func findLCM(of array: [Int]) -> Int {
+    guard let first = array.first else {
+        return 0 // or handle the case where the array is empty
+    }
+
+    return array.dropFirst().reduce(first) { currentLCM, element in
+        lcm(currentLCM, element)
+    }
+}
+
 public extension Array where Element == Int {
     func median() -> Double {
         let sortedArray = sorted()
