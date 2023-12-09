@@ -64,7 +64,6 @@ public struct Day8 {
             }
         }
          
-        print(results)
         return findLCM(of: results)
     }
 }
