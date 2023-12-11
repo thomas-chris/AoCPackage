@@ -25,6 +25,24 @@ public extension Collection {
     }
 }
 
+public extension Collection where Element: Collection, Element.Element: Equatable {
+    func transpose() -> [[Element.Element]] {
+        guard let rowCount = first?.count, allSatisfy({ $0.count == rowCount }) else {
+            fatalError("All subarrays must have the same count")
+        }
+
+        var result = Array(repeating: [Element.Element](), count: rowCount)
+
+        for i in indices {
+            for (j, element) in self[i].enumerated() {
+                result[j].append(element)
+            }
+        }
+
+        return result
+    }
+}
+
 
 public extension Array {
     mutating func rotate() -> Element? {

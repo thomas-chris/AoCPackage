@@ -41,6 +41,12 @@ public struct Position: Equatable, Hashable {
         }
     }
     
+    public func manhattanDistance(to other: Position, xExpansion: Int = 0, yExpansion: Int = 0) -> Int {
+        let deltaX = abs(self.x - other.x) + xExpansion
+        let deltaY = abs(self.y - other.y) + yExpansion
+        return deltaX + deltaY
+    }
+    
     /// currently only does +1,-1 in any direction...
     public func vector(_ newPostion: Position) -> [Position] {
         var positions = [Position]()
