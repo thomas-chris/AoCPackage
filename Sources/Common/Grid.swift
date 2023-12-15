@@ -21,13 +21,13 @@ public class Grid<T> {
     
     public var grid: [Position: T]
     
-    public init(_ input: [String]) {
+    public init(_ input: [String], conversion: (String) -> T = { value in return value as! T }) {
         var dictionary = [Position: T]()
          
         for y in 0..<input.count {
             let row = input[y]
             for x in 0..<row.count {
-                dictionary[Position(x: x, y: y)] = ((row[x]) as! T)
+                dictionary[Position(x: x, y: y)] = (conversion(row[x]))
             }
         }
         
@@ -44,7 +44,26 @@ public class Grid<T> {
                     row.append(char)
                 }
             }
+            
             Swift.print(row)
+        }
+        
+        Swift.print("\n")
+    }
+}
+
+public extension Grid where T == String {
+    func print() {
+        for y in yRange.0 ... yRange.1 {
+            var row: [String] = []
+            for x in xRange.0 ... xRange.1 {
+                if let char = grid[Position(x: x, y: y)] {
+                    
+                    row.append(char)
+                }
+            }
+            
+            Swift.print(row.reduce("", +))
         }
         
         Swift.print("\n")
