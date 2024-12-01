@@ -5,6 +5,9 @@ public extension Input {
         let data = Input.getInput(name: file, bundle: bundle)
 		let string = String(decoding: data, as: UTF8.self)
 		let array = string.components(separatedBy: seperator)
-		return array.compactMap { return compactmap($0) }
+        let filteredArray = array.filter { string in
+            !string.isEmpty
+        }
+		return filteredArray.compactMap { return compactmap($0) }
 	}
 }

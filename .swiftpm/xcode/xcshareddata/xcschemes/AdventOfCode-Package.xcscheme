@@ -104,6 +104,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TwentyTwentyFour"
+               BuildableName = "TwentyTwentyFour"
+               BlueprintName = "TwentyTwentyFour"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -149,6 +163,16 @@
                BlueprintIdentifier = "TwentyTwentyThreeTests"
                BuildableName = "TwentyTwentyThreeTests"
                BlueprintName = "TwentyTwentyThreeTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TwentyTwentyFourTests"
+               BuildableName = "TwentyTwentyFourTests"
+               BlueprintName = "TwentyTwentyFourTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

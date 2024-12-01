@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Bundle {
-    static var twentyTwentyThree: Bundle {
+    static var twentyTwentyFour: Bundle {
         Bundle.module
     }
 }
