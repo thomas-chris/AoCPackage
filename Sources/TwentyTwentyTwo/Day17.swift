@@ -14,7 +14,7 @@ public struct Day17 {
         getMaxHeights(input).count
     }
     
-    private static func move(x: Int, y: Int, minY: Int, target: Grid) -> Int? {
+    private static func move(x: Int, y: Int, minY: Int, target: Grid<Int>) -> Int? {
         var position = Position.origin
         var x = x
         var y = y
@@ -34,7 +34,7 @@ public struct Day17 {
     }
     
     private static func getMaxHeights(_ input: String) -> [Int] {
-        let positions = Grid([])
+        let positions = Grid<Int>([])
         
         let values = input.replacingOccurrences(of: "target area: ", with: "").components(separatedBy: ", ")
         let xBounds = values[0].replacingOccurrences(of: "x=", with: "").components(separatedBy: "..").compactMap { Int($0) }

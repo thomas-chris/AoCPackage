@@ -6,7 +6,7 @@ public struct Day18 {
         
         let fishes = input.map(Fish.init)
         
-        var result = fishes.first!
+        let result = fishes.first!
         let reducedFish = fishes.dropFirst().reduce(result) { partialResult, fish in
             let fish = Fish.addFish(partialResult, fish)
             let result = Fish.reduceFishes(fish)
@@ -22,7 +22,7 @@ public struct Day18 {
         
         let options = fishes.permutations(ofCount: 2)
         
-        var results = options.map { array -> Fish in
+        let results = options.map { array -> Fish in
             let fish = Fish.addFish(array[0], array[1])
             return Fish.reduceFishes(fish)
         }

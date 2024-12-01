@@ -123,7 +123,7 @@ public struct Day16 {
             if I == "1" {
                 let numberSubPackets = Int(String(binaryString.prefix(11)), radix: 2)!
                 binaryString = String(binaryString.dropFirst(11))
-                for i in 0..<numberSubPackets {
+                for _ in 0..<numberSubPackets {
                     newPacket.subPackets.append(parse(&binaryString))
                 }
             }

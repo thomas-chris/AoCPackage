@@ -7,7 +7,9 @@ public struct Day5 {
     
     public typealias Stack = [Character]
     public typealias Stacks = [Int: Stack]
-    static let regex = Regex("[\\w]* ([\\d]+) [\\w]* ([\\d]+) [\\w]* ([\\d]+)")
+    static var regex: Regex {
+        Regex("[\\w]* ([\\d]+) [\\w]* ([\\d]+) [\\w]* ([\\d]+)")
+    }
     
     public static func part1(_ input: [String]) -> String {
         

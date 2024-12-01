@@ -9,12 +9,11 @@ public struct Day5 {
         var input = input
         let seeds = input.removeFirst()
         let components = seeds.components(separatedBy: ":")
-        let seedsKey = components.first!
         let seedsValues = components.last!.components(separatedBy: " ").compactMap { Int($0) }
         
         let keys = ["seed-to-soil map", "soil-to-fertilizer map", "fertilizer-to-water map", "water-to-light map", "light-to-temperature map", "temperature-to-humidity map", "humidity-to-location map"]
         
-        var dictionary = input.reduce(into: [String: [Int: (Int, Int)]]()) { partialResult, value in
+        let dictionary = input.reduce(into: [String: [Int: (Int, Int)]]()) { partialResult, value in
             let components = value.components(separatedBy: "\n")
             let values = components.dropFirst()
             var instructions = [Int: (Int, Int)]()
@@ -67,7 +66,6 @@ public struct Day5 {
         var input = input
         let seeds = input.removeFirst()
         let components = seeds.components(separatedBy: ":")
-        let seedsKey = components.first!
         let seedPairs = components.last!.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ").compactMap({ Int($0) }).chunked(into: 2)
         
         var seedValues = [Int]()
@@ -77,7 +75,7 @@ public struct Day5 {
         
         let keys = ["seed-to-soil map", "soil-to-fertilizer map", "fertilizer-to-water map", "water-to-light map", "light-to-temperature map", "temperature-to-humidity map", "humidity-to-location map"]
         
-        var dictionary = input.reduce(into: [String: [Int: (Int, Int)]]()) { partialResult, value in
+        let dictionary = input.reduce(into: [String: [Int: (Int, Int)]]()) { partialResult, value in
             let components = value.components(separatedBy: "\n")
             let values = components.dropFirst()
             var instructions = [Int: (Int, Int)]()

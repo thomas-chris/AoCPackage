@@ -25,7 +25,7 @@ public struct Day10 {
     }
     
     public static func getAnswerPart2(input: [String]) throws -> Int {
-        var valuesAndDistance = findMaxDistance(sketch: input)
+//        let valuesAndDistance = findMaxDistance(sketch: input)
         
         return 0
     }

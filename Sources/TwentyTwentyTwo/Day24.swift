@@ -62,7 +62,7 @@ public struct Day24 {
             if para.1 > 0 {
                 array.append("\(index) + \(para.2)")
             } else {
-                print("\(index) = \(array.popLast()) - \(para.2) \n")
+                print("\(index) = \(String(describing: array.popLast())) - \(para.2) \n")
             }
         }
         
@@ -75,7 +75,7 @@ public struct Day24 {
         var y = 0
         var z = 0
         
-        var intCount = 0
+        let intCount = 0
         
         for value in monad {
             switch value {

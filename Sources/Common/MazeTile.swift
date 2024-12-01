@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum MazeTile: Equatable {
+public enum MazeTile: Equatable, Sendable {
     case wall
     case entrance
     case key(Character)
@@ -28,5 +28,5 @@ public enum MazeTile: Equatable {
         return d
     }
     
-    static let start = Position(x: 0, y: 0)
+    @MainActor static let start = Position(x: 0, y: 0)
 }

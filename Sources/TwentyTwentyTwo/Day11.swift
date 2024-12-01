@@ -7,11 +7,11 @@ public struct Day11 {
     
     public static func part1(_ input: [String], turns: Int) -> Int {
         
-        var initialGrid = Grid(input)
+        var initialGrid = Grid<Int>(input)
         var totalFlashCount = 0
         
         for _ in 0..<turns {
-            var newGrid = initialGrid
+            let newGrid = initialGrid
             var flashes = [Position]()
             
             initialGrid.grid.forEach { position, value in
@@ -49,13 +49,13 @@ public struct Day11 {
     
     public static func part2(_ input: [String]) throws -> Int {
     
-        var initialGrid = Grid(input)
+        var initialGrid = Grid<Int>(input)
         var totalFlashCount = 0
         var count = 0
         
         while !(initialGrid.grid.values.filter { $0 == 0 }.count == 100) {
             count += 1
-            var newGrid = initialGrid
+            let newGrid = initialGrid
             var flashes = [Position]()
             
             initialGrid.grid.forEach { position, value in

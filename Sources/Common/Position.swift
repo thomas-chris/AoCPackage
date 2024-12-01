@@ -97,7 +97,7 @@ public extension Position {
     }
 }
 
-public struct XYZ: Equatable, Hashable {
+public struct XYZ: Equatable, Hashable, Sendable {
     let x: Int
     let y: Int
     let z: Int

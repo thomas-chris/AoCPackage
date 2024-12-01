@@ -19,7 +19,7 @@ public struct Day9 {
         var uniqueTailPositions = Set([tailPosition])
         
         for instruction in instructions {
-            for i in 0..<instruction.1 {
+            for _ in 0..<instruction.1 {
                 let newHeadPosition = headPosition.move(vector: instruction.0)
                 let surroundingPositions = newHeadPosition.matrix
                 if surroundingPositions.first(where: { $0 == tailPosition }) == nil {
@@ -99,7 +99,7 @@ public struct Day9 {
         var uniqueTailPositions = Set([headPosition])
         
         for instruction in instructions {
-            for i in 0..<instruction.1 {
+            for _ in 0..<instruction.1 {
                 let newHeadPosition = headPosition.move(vector: instruction.0)
                 var positionToEvaluateAgainst = newHeadPosition
                 var newRopePositions = [Position]()

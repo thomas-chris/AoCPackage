@@ -5,7 +5,7 @@ public struct Day20 {
     
     public static func part1(_ input: [String], times: Int) -> Int {
         
-        var input = input
+        let input = input
         var algorithm = [Int]()
         
         let row = input.first!
@@ -24,10 +24,10 @@ public struct Day20 {
             
             return row
         }
-        var image = Grid(thing)
+        var image = Grid<Int>(thing)
         var infiniteValue = false
         
-        for i in 0 ..< times {
+        for _ in 0 ..< times {
             image = useAlgorithm(image, algorithm: algorithm, infiniteValue: infiniteValue)
             if algorithm.first == 1 {
                 infiniteValue.toggle()
@@ -43,14 +43,14 @@ public struct Day20 {
         return 1
     }
     
-    private static func useAlgorithm(_ image: Grid, algorithm: [Int], infiniteValue: Bool) -> Grid {
+    private static func useAlgorithm(_ image: Grid<Int>, algorithm: [Int], infiniteValue: Bool) -> Grid<Int> {
         let xRangeValues = image.xRange
         let yRangeValues = image.yRange
         
         let xRange = (xRangeValues.0 - 1) ... (xRangeValues.1 + 1)
         let yRange = (yRangeValues.0 - 1) ... (yRangeValues.1 + 1)
 
-        let copy = Grid([])
+        let copy = Grid<Int>([])
 
         for x in xRange {
             for y in yRange {
