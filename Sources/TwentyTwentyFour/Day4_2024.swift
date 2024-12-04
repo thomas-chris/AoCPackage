@@ -105,9 +105,6 @@ public actor Day4 {
                 total += 1
             }
             
-            if total > 0 {
-                print("\(position), total: \(total)")
-            }
             return total
         }
             .reduce(0, +)
