@@ -13,6 +13,10 @@ public enum Direction: String, CaseIterable {
     case down = "D"
     case left = "L"
     case right = "R"
+    case upRight = "UR"
+    case upLeft = "UL"
+    case downRight = "DR"
+    case downLeft = "DL"
     
     public var opposite: Direction {
         switch self {
@@ -24,7 +28,14 @@ public enum Direction: String, CaseIterable {
             return .right
         case .right:
             return .left
-            
+        case .upRight:
+            return .downLeft
+        case .upLeft:
+            return .downRight
+        case .downRight:
+            return .upLeft
+        case .downLeft:
+            return .upRight
         }
     }
 }

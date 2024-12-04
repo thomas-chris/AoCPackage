@@ -42,20 +42,4 @@ public actor Day3 {
             partialResult += values.0 * values.1
         }
     }
-    
-    static func rules(_ array: [Int]) -> Bool {
-        let diff = zip(array, array.dropFirst()).map { $1 - $0 }
-        return diff.allSatisfy { abs($0) >= 1 && abs($0) <= 3 } && (diff.allSatisfy { $0 > 0 } || diff.allSatisfy { $0 < 0 })
-    }
-    
-    static func isValid(_ row: [Int]) -> Bool {
-        for i in 0..<row.count {
-            var row = row
-            row.remove(at: i)
-            if rules(row) {
-                return true
-            }
-        }
-        return false
-    }
 }

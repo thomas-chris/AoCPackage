@@ -32,6 +32,14 @@ public struct Position: Equatable, Hashable {
             return Position(x: self.x, y: self.y - 1)
         case .left:
             return Position(x: self.x - 1, y: self.y)
+        case .upRight:
+            return Position(x: self.x + 1, y: self.y + 1)
+        case .upLeft:
+            return Position(x: self.x - 1, y: self.y + 1)
+        case .downRight:
+            return Position(x: self.x + 1, y: self.y - 1)
+        case .downLeft:
+            return Position(x: self.x - 1, y: self.y - 1)
         }
     }
     
