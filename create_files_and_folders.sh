@@ -9,7 +9,7 @@ create_structure() {
 
     # Define the folder structure and files using variables
     local folder_structure=(
-        "Sources/Twenty$x/Inputs/Day$y:Day${y}_20${z}.txt,Day${y}_Example_20${z}.txt"
+        "Sources/Twenty$x/Inputs/Day$y:Day${y}_20${z}.txt,Day${y}Example_20${z}.txt"
         "Sources/Twenty$x/:Day${y}_20${z}.swift"
         "Tests/Twenty${x}Tests:Day${y}Tests_20${z}.swift"
     )
