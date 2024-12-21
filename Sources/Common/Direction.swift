@@ -38,6 +38,17 @@ public enum Direction: String, CaseIterable {
             return .upRight
         }
     }
+    
+    public func rotateRight() -> Direction {
+        switch self {
+        case .up: return .left
+        case .right: return .up
+        case .down: return .right
+        case .left: return .down
+        default: fatalError("Not programmed")
+        
+        }
+    }
 }
 
 public enum CardinalDirection: CaseIterable {

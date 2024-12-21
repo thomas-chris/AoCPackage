@@ -61,7 +61,9 @@ populate_template() {
 //  This file contains the solution for Day ${y}, 20${z}.
 //
 
-import Foundation
+import Algorithms
+import Common
+import Regex
 
 public struct Day${y} {
     public static func getAnswerPart1(input: [String]) -> Int {

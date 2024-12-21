@@ -11,7 +11,7 @@ public struct Day11 {
         var totalFlashCount = 0
         
         for _ in 0..<turns {
-            let newGrid = initialGrid
+            var newGrid = initialGrid
             var flashes = [Position]()
             
             initialGrid.grid.forEach { position, value in
@@ -55,7 +55,7 @@ public struct Day11 {
         
         while !(initialGrid.grid.values.filter { $0 == 0 }.count == 100) {
             count += 1
-            let newGrid = initialGrid
+            var newGrid = initialGrid
             var flashes = [Position]()
             
             initialGrid.grid.forEach { position, value in

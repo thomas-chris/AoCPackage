@@ -7,7 +7,7 @@ public struct Day15 {
     
     public static func part1(_ input: [String]) -> Int {
         
-        let positions = Grid<Int>(input)
+        var positions = Grid<Int>(input)
         
         return positions.dijkstra(start: Position(x: 0, y: 0), end: Position(x: positions.rows - 1, y: positions.columns - 1))
     }
@@ -15,7 +15,7 @@ public struct Day15 {
     public static func part2(_ input: [String]) -> Int {
         let maxX = input.first!.count
         let maxY = input.count
-        let positions = Grid<Int>(input)
+        var positions = Grid<Int>(input)
         
         for x in 0..<maxX {
             for y in 0..<maxY {

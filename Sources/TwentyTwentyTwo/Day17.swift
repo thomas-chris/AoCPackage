@@ -34,7 +34,7 @@ public struct Day17 {
     }
     
     private static func getMaxHeights(_ input: String) -> [Int] {
-        let positions = Grid<Int>([])
+        var positions = Grid<Int>([])
         
         let values = input.replacingOccurrences(of: "target area: ", with: "").components(separatedBy: ", ")
         let xBounds = values[0].replacingOccurrences(of: "x=", with: "").components(separatedBy: "..").compactMap { Int($0) }

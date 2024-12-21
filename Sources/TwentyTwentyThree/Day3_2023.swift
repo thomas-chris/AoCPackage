@@ -7,7 +7,7 @@ public struct Day3 {
     public static func getAnswerPart1(input: [String]) -> Int {
         let rows = input.count
         let columns = input.first!.count
-        let grid = Grid<String>(input)
+        var grid = Grid<String>(input)
         
         let filteredGrid = grid.grid.filter { (key: Position, value: String) in
             value != "."

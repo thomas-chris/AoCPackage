@@ -50,7 +50,7 @@ public struct Day20 {
         let xRange = (xRangeValues.0 - 1) ... (xRangeValues.1 + 1)
         let yRange = (yRangeValues.0 - 1) ... (yRangeValues.1 + 1)
 
-        let copy = Grid<Int>([])
+        var copy = Grid<Int>([])
 
         for x in xRange {
             for y in yRange {

@@ -113,7 +113,7 @@ public struct Day10 {
     private static func findMaxDistance(sketch: [String]) -> (Int, Grid<String>)  {
         var pipeGraph: [Position: Pipe] = [:]
         let basicInput = Array(repeating: Array(repeating: ".", count: sketch.first!.count).reduce("", +), count: sketch.count)
-        let grid = Grid<String>(basicInput)
+        var grid = Grid<String>(basicInput)
         
         // Parse the sketch and fill the pipeGraph dictionary
         for (y, line) in sketch.enumerated() {

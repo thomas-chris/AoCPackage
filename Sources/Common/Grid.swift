@@ -1,6 +1,6 @@
 import Foundation
 
-public class Grid<T> {
+public struct Grid<T> {
     
     public var columns: Int {
         grid.keys.max { $0.y < $1.y }!.y + 1
@@ -49,6 +49,10 @@ public class Grid<T> {
         }
         
         Swift.print("\n")
+    }
+    
+    public func isOutOfBounds(_ position: Position) -> Bool {
+        position.x < xRange.0 || position.x > xRange.1 || position.y < yRange.0 || position.y > yRange.1
     }
 }
 
