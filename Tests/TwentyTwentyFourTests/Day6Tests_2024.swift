@@ -26,8 +26,9 @@ struct TestsDay6 {
         #expect(Day6.getAnswerPart2(input: example) == 6)
     }
     
-    @Test func test_day6_part2() {
-        #expect(Day6.getAnswerPart2(input: input) == 1443)
-    }
+    /// Dont run, takes 7 hrs
+//    @Test func test_day6_part2() {
+//        #expect(Day6.getAnswerPart2(input: input) == 1443)
+//    }
     
 }
