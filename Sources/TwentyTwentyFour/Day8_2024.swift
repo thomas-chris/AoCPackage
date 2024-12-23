@@ -22,7 +22,7 @@ public struct Day8 {
             }.keys.map { $0 as Position }
             
             positions.combinations(ofCount: 2).forEach { combo in
-                results = results.union(getAntiNodes(combo[0], combo[1], in: grid))
+                results = results.union(getAntiNodes(combo[0], combo[1], in: grid, isInfinite: false))
             }
         }
         
@@ -30,32 +30,65 @@ public struct Day8 {
     }
 
     public static func getAnswerPart2(input: [String]) -> Int {
-        // Your code for part 2
-        return 0
+        let grid = Grid<String>(input)
+        let settable = grid.grid.filter({ (key, value) in
+            value != "."
+        })
+        let set = Set(settable.values)
+        var results = Set(settable.keys)
+        for node in set {
+            let positions = grid.grid.filter { (key, value) in
+                value == node
+            }.keys.map { $0 as Position }
+            
+            positions.combinations(ofCount: 2).forEach { combo in
+                results = results.union(getAntiNodes(combo[0], combo[1], in: grid, isInfinite: true))
+            }
+        }
+        
+        return results.count
     }
     
-    private static func getAntiNodes(_ position1: Position, _ position2: Position, in grid: Grid<String>) -> [Position] {
+    private static func getAntiNodes(_ position1: Position, _ position2: Position, in grid: Grid<String>, isInfinite: Bool) -> [Position] {
         let xDifference = (position1.x - position2.x)
         let yDifference = (position1.y - position2.y)
-        
-        let newX1 = position1.x + xDifference
-        let newY1 = position1.y + yDifference
-        
-        let newX2 = position2.x - xDifference
-        let newY2 = position2.y - yDifference
-        
-        let newPosition1 = Position(x: newX1, y: newY1)
-        let newPosition2 = Position(x: newX2, y: newY2)
-        
         var results: [Position] =  []
-        if !grid.isOutOfBounds(newPosition1) {
-            results.append(newPosition1)
+        
+        var isInGrid = true
+        var variablePosition1 = position1
+        while isInGrid {
+            let newX = variablePosition1.x + xDifference
+            let newY = variablePosition1.y + yDifference
+            variablePosition1 = Position(x: newX, y: newY)
+            
+            if !grid.isOutOfBounds(variablePosition1) {
+                results.append(variablePosition1)
+                if !isInfinite {
+                    isInGrid = false
+                }
+            } else {
+                isInGrid = false
+            }
+            
         }
-
-        if !grid.isOutOfBounds(newPosition2) {
-            results.append(newPosition2)
+        
+        isInGrid = true
+        var variablePosition2 = position2
+        while isInGrid {
+            let newX = variablePosition2.x - xDifference
+            let newY = variablePosition2.y - yDifference
+            variablePosition2 = Position(x: newX, y: newY)
+            
+            if !grid.isOutOfBounds(variablePosition2) {
+                results.append(variablePosition2)
+                if !isInfinite {
+                    isInGrid = false
+                }
+            } else {
+                isInGrid = false
+            }
         }
-
+        
         return results
         
     }

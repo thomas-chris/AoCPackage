@@ -23,11 +23,11 @@ struct TestsDay8 {
     }
     
     @Test func test_day8_part2_Example() {
-        #expect(Day8.getAnswerPart2(input: example) == 31)
+        #expect(Day8.getAnswerPart2(input: example) == 34)
     }
     
     @Test func test_day8_part2() {
-        #expect(Day8.getAnswerPart2(input: input) == 26407426)
+        #expect(Day8.getAnswerPart2(input: input) == 1233)
     }
     
 }
