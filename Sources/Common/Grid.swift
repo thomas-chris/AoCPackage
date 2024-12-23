@@ -35,6 +35,16 @@ public struct Grid<T> {
         grid = dictionary
     }
     
+    public init(x: Int, y: Int, value: T) {
+        var dictionary = [Position: T]()
+        for j in 0..<y {
+            for i in 0..<x {
+                dictionary[Position(x: i, y: j)] = value
+            }
+        }
+        grid = dictionary
+    }
+    
     public func print() {
         for y in yRange.0 ... yRange.1 {
             var row: [T] = []
