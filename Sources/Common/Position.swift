@@ -44,7 +44,7 @@ public struct Position: Equatable, Hashable {
     }
     
     public func getAdjacentPositions() -> [Position] {
-        Direction.allCases.map { direction in
+        [Direction.up, .down, .left, .right].map { direction in
             self.move(vector: direction)
         }
     }
