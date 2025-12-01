@@ -1,6 +1,6 @@
 import Algorithms
 import Common
-import Regex
+@preconcurrency import Regex
 
 public actor Day3 {
     

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Regex
+@preconcurrency import Regex
 
 public actor Day5 {
     static let part1Regex = Regex(#"(\d+)\|(\d+)"#)
