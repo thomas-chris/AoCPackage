@@ -31,6 +31,28 @@ public struct Day2 {
         return numbersToAdd.reduce(0, +)
     }
 
+    public static func getAnswerPart1b(input: String) -> Int {
+
+        input
+            .components(separatedBy: ",")
+            .map { line in
+                let range = line.components(separatedBy: "-")
+                return (range[0], range[1])
+            }
+            .compactMap { range in
+                let thing = Array(Int(range.0)!...Int(range.1)!)
+                    .compactMap { value in
+                        if String(value).splitStringInHalfAndCheckIfEqual() {
+                            return value
+                        }
+                        return nil
+                    }
+                    .reduce(0, +)
+                return thing
+            }
+            .reduce(0, +)
+    }
+
     public static func getAnswerPart2(input: String) -> Int {
         var numbersToAdd = [Int]()
         input
