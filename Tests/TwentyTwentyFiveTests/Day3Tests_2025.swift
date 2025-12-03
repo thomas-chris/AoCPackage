@@ -12,6 +12,7 @@ import XCTest
 
 struct TestsDay3 {
     let input = Input.array(seperator: "\n", file: "Day3_2025", bundle: .twentyTwentyFive, compactmap: { $0 })
+    let pj = Input.array(seperator: "\n", file: "Day3_PJ_2025", bundle: .twentyTwentyFive, compactmap: { $0 })
     let example = Input.array(seperator: "\n", file: "Day3Example_2025", bundle: .twentyTwentyFive, compactmap: { $0 })
     
     @Test func day3_part1Example() {
@@ -29,5 +30,26 @@ struct TestsDay3 {
     @Test func test_day3_part2() {
         #expect(Day3.getAnswerPart2(input: input) == 171741365473332)
     }
-    
+
+    @Test func test_day3_pj() {
+        #expect(Day3.getAnswerPart2(input: pj) == 169077317650774)
+    }
+
+}
+
+class Day3Tests: XCTestCase {
+    let input = Input.array(seperator: "\n", file: "Day3_2025", bundle: .twentyTwentyFive, compactmap: { $0 })
+    let example = Input.array(seperator: "\n", file: "Day3Example_2025", bundle: .twentyTwentyFive, compactmap: { $0 })
+
+    func test_part1() throws {
+        measure {
+            XCTAssertTrue(Day3.getAnswerPart1(input: input) == 17316)
+        }
+    }
+
+    func test_part2() throws {
+        measure {
+            XCTAssertTrue(Day3.getAnswerPart2(input: input) == 171741365473332)
+        }
+    }
 }
