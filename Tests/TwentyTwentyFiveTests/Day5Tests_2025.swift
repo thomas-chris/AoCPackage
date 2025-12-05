@@ -23,11 +23,29 @@ struct TestsDay5 {
     }
     
     @Test func test_day5_part2_Example() {
-        #expect(Day5.getAnswerPart2(input: example) == 31)
+        #expect(Day5.getAnswerPart2(input: example) == 14)
     }
     
     @Test func test_day5_part2() {
-        #expect(Day5.getAnswerPart2(input: input) == 26407426)
+        #expect(Day5.getAnswerPart2(input: input) == 344486348901788)
     }
     
+}
+
+class Day5Tests: XCTestCase {
+    let input = Input.getInputString(name: "Day5_2025", bundle: .twentyTwentyFive)
+    let example = Input.getInputString(name: "Day5Example_2025", bundle: .twentyTwentyFive)
+
+
+    func test_part1() throws {
+        measure {
+            XCTAssertTrue(Day5.getAnswerPart1(input: input) == 739)
+        }
+    }
+
+    func test_part2() throws {
+        measure {
+            XCTAssertTrue(Day5.getAnswerPart2(input: input) == 344486348901788)
+        }
+    }
 }
