@@ -44,7 +44,7 @@ public struct Day6 {
         return result
     }
 
-    public static func getAnswerPart2(input: [String]) -> Int {
+    public static func getAnswerPart2_wrong(input: [String]) -> Int {
 
         let instructions = input.last?
             .trimmingCharacters(in: .whitespaces)
@@ -81,6 +81,63 @@ public struct Day6 {
         }
 
         return result
+    }
+
+    enum Problem {
+        case multiply
+        case add
+    }
+
+    static func calculate(total: inout Int, values: [Int], problem: Problem) {
+        switch problem {
+        case .add:
+            total += values.reduce(0, +)
+
+        case .multiply:
+            total += values.reduce(1, *)
+        }
+    }
+
+    static func findProblem(at index: Int, in input: [String]) -> Problem {
+        switch input.last![index] {
+        case "+": .add
+        case "*": .multiply
+        default: .add
+        }
+    }
+
+    public static func getAnswerPart2(input: [String]) -> Int {
+
+        let columns = input.first!.count
+        var problem = Problem.add
+        var values: [Int] = []
+        var total = 0
+
+        problem = findProblem(at: 0, in: input)
+
+        for x in 0..<columns {
+            var digits: String = ""
+            for y in 0..<input.count - 1 {
+                digits.append(String(input[y][x]))
+            }
+
+            let value = Int(digits.compactMap { Int(String($0)) == nil ? nil : String($0) }.joined())
+
+            guard let value else {
+                calculate(total: &total, values: values, problem: problem)
+                values.removeAll()
+
+                if x + 1 < columns {
+                    problem = findProblem(at: x + 1, in: input)
+                }
+                continue
+            }
+            values.append(value)
+        }
+
+        calculate(total: &total, values: values, problem: problem)
+
+        return total
     }
 
 }
