@@ -34,7 +34,7 @@ public struct Grid<T> {
         
         grid = dictionary
     }
-    
+
     public init(x: Int, y: Int, value: T) {
         var dictionary = [Position: T]()
         for j in 0..<y {
@@ -63,6 +63,14 @@ public struct Grid<T> {
     
     public func isOutOfBounds(_ position: Position) -> Bool {
         position.x < xRange.0 || position.x > xRange.1 || position.y < yRange.0 || position.y > yRange.1
+    }
+}
+
+public extension Grid where T: Equatable {
+    func positions(for value: T) -> [Position] {
+        Array(grid.filter { position, point in
+            value == point
+        }.keys)
     }
 }
 
