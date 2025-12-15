@@ -46,21 +46,21 @@ public extension Collection where Element: Collection, Element.Element: Equatabl
 
 public extension Array {
     mutating func rotate() -> Element? {
-        
+
         guard let first = self.first else { return nil }
-        
+
         var value = Array(self.dropFirst())
         value.append(first)
         self = value
         return first
     }
-    
+
     mutating func rotate(by index: Int) -> Element? {
         var element: Element? = nil
         for _ in 1...index {
             element = rotate()
         }
-        
+
         return element
     }
 }
@@ -87,6 +87,38 @@ public extension ClosedRange where Bound == Int {
             return [(lowerBound ... other.lowerBound - 1), (other.lowerBound ... upperBound)]
         }
     }
-    
+
     var magnitude: Int { abs(upperBound - lowerBound + 1) }
+}
+
+public extension Array where Element == ThreeDPosition {
+    /// Returns a dictionary where the key is the Manhattan distance and the value is an array of tuples of positions at that distance
+    func manhattanDistancePairs() -> [Int: [(ThreeDPosition, ThreeDPosition)]] {
+        var result: [Int: [(ThreeDPosition, ThreeDPosition)]] = [:]
+        for i in 0..<self.count {
+            for j in (i+1)..<self.count {
+                let pos1 = self[i]
+                let pos2 = self[j]
+                let distance = pos1.manhattan(to: pos2)
+                result[distance, default: []].append((pos1, pos2))
+            }
+        }
+        return result
+    }
+
+    /// Returns a dictionary where the key is the Euclidean distance and the value is an array of tuples of positions at that distance
+    func euclideanDistancePairs() -> [Double: [(ThreeDPosition, ThreeDPosition)]] {
+        var result: [Double: [(ThreeDPosition, ThreeDPosition)]] = [:]
+        for i in 0..<self.count {
+            for j in (i+1)..<self.count {
+                let pos1 = self[i]
+                let pos2 = self[j]
+                let distance = pos1.euclidean(to: pos2)
+                result[distance, default: []].append((pos1, pos2))
+            }
+        }
+        return result
+    }
+
+
 }
