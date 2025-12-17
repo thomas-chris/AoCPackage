@@ -48,7 +48,7 @@ public struct Position: Equatable, Hashable {
             self.move(vector: direction)
         }
     }
-    
+
     public func manhattanDistance(to other: Position, xExpansion: Int = 0, yExpansion: Int = 0) -> Int {
         let deltaX = abs(self.x - other.x) + xExpansion
         let deltaY = abs(self.y - other.y) + yExpansion

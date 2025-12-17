@@ -119,6 +119,4 @@ public extension Array where Element == ThreeDPosition {
         }
         return result
     }
-
-
 }
