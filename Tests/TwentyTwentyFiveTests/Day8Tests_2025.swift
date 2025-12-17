@@ -19,15 +19,15 @@ struct TestsDay8 {
     }
     
     @Test func test_day8_part1() {
-        #expect(Day8.getAnswerPart1(input: input, junctions: 1000) == 57024)
+        #expect(Day8.getAnswerPart1(input: input, junctions: 1000) == 68112)
     }
     
     @Test func test_day8_part2_Example() {
-        #expect(Day8.getAnswerPart2(input: example) == 31)
+        #expect(Day8.getAnswerPart2(input: example) == 25272)
     }
     
     @Test func test_day8_part2() {
-        #expect(Day8.getAnswerPart2(input: input) == 26407426)
+        #expect(Day8.getAnswerPart2(input: input) == 44543856)
     }
     
 }

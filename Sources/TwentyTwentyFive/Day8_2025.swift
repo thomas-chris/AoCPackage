@@ -82,8 +82,47 @@ public struct Day8 {
     }
 
     public static func getAnswerPart2(input: [String]) -> Int {
-        // Your code for part 2
+
+
+        let points = input.map { line in
+            let components = line.components(separatedBy: ",").compactMap { Int($0) }
+            return ThreeDPosition(x: components[0], y: components[1], z: components[2])
+        }
+
+        let pointsAndDistances = points.euclideanDistancePairs()
+
+        let pairs = pointsAndDistances
+            .sorted { $0.key < $1.key }
+            .compactMap {
+                $0.value.first
+            }
+
+        var groups: [Set<ThreeDPosition>] = []
+        for pair in pairs {
+            reduceGroups(with: pair, &groups)
+
+            if groups.count == 1, groups.first!.count == points.count {
+                return pair.0.x * pair.1.x
+            }
+        }
+
         return 0
+    }
+
+    private static func reduceGroups(with pair: (ThreeDPosition, ThreeDPosition), _ groups: inout [Set<ThreeDPosition>]) {
+        var newGroup = Set([pair.0, pair.1])
+        var newGroups: [Set<ThreeDPosition>] = []
+
+        for group in groups {
+            if group.intersection(newGroup).count > 0 {
+                newGroup = newGroup.union(group)
+            } else {
+                newGroups.append(group)
+            }
+        }
+
+        newGroups.append(newGroup)
+        groups = newGroups
     }
 
     
